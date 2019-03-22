@@ -2,11 +2,9 @@ package com.example.mygallery;
 
 
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.Toolbar;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -28,7 +26,6 @@ public class AboutActivity extends AppCompatActivity {
             finish();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

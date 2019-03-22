@@ -16,14 +16,16 @@ public class GridActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         //inflate the menu - adding items to actions bar
         getMenuInflater().inflate(R.menu.grid_menu, menu);
         return true;
-        }
+    }
     //check if item bar was selected
+
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_grid_view:
                 NavUtils.navigateUpFromSameTask(this);
@@ -37,4 +39,6 @@ public class GridActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    }
+
+
+}
