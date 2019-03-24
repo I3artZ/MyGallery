@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
+
     android:background="@color/colorBackList">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/grid_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:background="@color/colorBackList"
         android:scrollbars="vertical"
         tools:itemCount="20"
         tools:layoutManager="GridLayoutManager"
         tools:listitem="@layout/recycler_grid_item"
-        tools:spanCount="3" />
+        tools:spanCount="2" />
 
 </RelativeLayout>

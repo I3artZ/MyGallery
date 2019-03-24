@@ -1,18 +1,20 @@
 package com.example.mygallery;
 
 
-public class DataModel {
+import java.io.Serializable;
+
+public class DataModel implements Serializable {
 
     String title;
     String author;
-    String datePublished;
-    int image;
+    String dateTaken;
+    String imageUrl;
 
-    public DataModel(String title, String author, String datePublished, int image) {
+    public DataModel(String title, String author, String dateTaken, String imageUrl) {
         this.title = title;
         this.author = author;
-        this.datePublished = datePublished;
-        this.image=image;
+        this.dateTaken = dateTaken;
+        this.imageUrl = imageUrl;
     }
 
     public String getTitle() {
@@ -23,11 +25,11 @@ public class DataModel {
         return author;
     }
 
-    public int getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public String getDatePublished() {
-        return datePublished;
+    public String getDateTaken() {
+        return dateTaken;
     }
 }

@@ -8,10 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 
 import java.util.ArrayList;
 
@@ -22,13 +22,21 @@ public class ListActivity extends AppCompatActivity {
     private static RecyclerView recyclerView;
     private static ArrayList<DataModel> data;
     static View.OnClickListener myOnClickListener;
+    private Context context;
+
+    public ListActivity(){}
+
+    public ListActivity(ArrayList<DataModel> data){
+        this.data = data;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        data = (ArrayList<DataModel>) getIntent().getSerializableExtra("data");
 
-        recyclerView = (RecyclerView) findViewById(R.id.list_recycler_view);
+        recyclerView = findViewById(R.id.list_recycler_view);
         myOnClickListener = new MyOnClickListener(this);
 
         //ensure that each added item is of same size (true - size of each item is fixed it won;t be
@@ -40,18 +48,7 @@ public class ListActivity extends AppCompatActivity {
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        data = new ArrayList<DataModel>();
-        for (int i = 0; i < MyData.titleArray.length; i++) {
-            data.add(new DataModel(
-                    MyData.titleArray[i],
-                    MyData.authorArray[i],
-                    MyData.datePublishedArray[i],
-                    MyData.drawableArray[i]
-                )
-            );
-        }
-
-        adapter = new CustomAdapter(data);
+        adapter = new ListAdapter(this, data);
         recyclerView.setAdapter(adapter);
     }
 
@@ -87,7 +84,9 @@ public class ListActivity extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.action_grid_view:
-                startActivity(new Intent(this, GridActivity.class));
+                Intent gridView = new Intent(this, GridActivity.class);
+                gridView.putExtra("data", data);
+                startActivity(gridView);
                 return true;
             case R.id.action_about:
                 startActivity(new Intent(this, AboutActivity.class));

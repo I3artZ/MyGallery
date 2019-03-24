@@ -1,5 +1,6 @@
 package com.example.mygallery;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,11 +8,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
-
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
+    private Context context;
     private ArrayList<DataModel> dataSet;
+
+    public ListAdapter(Context context, ArrayList<DataModel> dataSet){
+        this.context = context;
+        this.dataSet = dataSet;
+    }
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -19,6 +28,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView textViewAuthor;
         TextView textViewDatePublished;
         ImageView imageViewPicture;
+        Context context;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -27,10 +37,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             this.textViewDatePublished = itemView.findViewById(R.id.list_item_text_date);
             this.imageViewPicture = itemView.findViewById(R.id.list_item_image);
         }
-    }
-
-    public CustomAdapter(ArrayList<DataModel> data) {
-        this.dataSet = data;
     }
 
     @Override
@@ -54,8 +60,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         textViewTitle.setText(dataSet.get(listPosition).getTitle());
         textViewAuthor.setText(dataSet.get(listPosition).getAuthor());
-        textViewDatePublished.setText(dataSet.get(listPosition).getDatePublished());
-        imageViewPicture.setImageResource(dataSet.get(listPosition).getImage());
+        textViewDatePublished.setText(dataSet.get(listPosition).getDateTaken());
+        Glide.with(context).load(dataSet.get(listPosition).getImageUrl()).into(imageViewPicture);
     }
 
     @Override
