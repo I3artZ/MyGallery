@@ -123,9 +123,9 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
         try {
             JSONObject baseJsonResponse = new JSONObject(flickerJSON);
             JSONArray itemsArray = baseJsonResponse.getJSONArray("items");
-            Log.v(LOG_TAG, itemsArray.length() +"" );
+            //Log.v(LOG_TAG, itemsArray.length() +"" );
 
-            // check if there are items in list(item - picture + desciption)
+            // check if there are items in list(item - picture + description)
             if (itemsArray.length() > 0) {
                 //
                 for (int i = 0; i < itemsArray.length() ; i++) {
@@ -135,8 +135,10 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
 
                     // Extract out the title, time, date_taken values and image_url
                     String title = item.optString("title");
-                    if (title == ""){title = "NO TITLE";}
-                    Log.v(LOG_TAG, title);
+                    //handle no title situation
+                    if (title.isEmpty() || title.replaceAll(" ","").isEmpty()){
+                        title = "UNTITLED";}
+                    //Log.v(LOG_TAG, title);
                     //date returned as "YYYY-MM-DDTHH-MM-SS-08:00"
                     String date_taken = "date taken: " + item.optString("date_taken")
                             .replace("T"," ")

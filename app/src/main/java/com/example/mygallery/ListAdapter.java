@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -20,7 +21,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         this.context = context;
         this.dataSet = dataSet;
     }
-
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -63,6 +63,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         textViewDatePublished.setText(dataSet.get(listPosition).getDateTaken());
         Glide.with(context).load(dataSet.get(listPosition).getImageUrl()).into(imageViewPicture);
     }
+
 
     @Override
     public int getItemCount() {

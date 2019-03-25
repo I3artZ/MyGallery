@@ -10,18 +10,20 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         if (!isOnline()) {
-            Toast.makeText(this, "Check your internet connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Check your internet connection",
+                    Toast.LENGTH_SHORT).show();
         } else {
             DataDownload dataDownload = new DataDownload(this);
             dataDownload.execute();
         }
+
     }
 
         public boolean isOnline() {
@@ -30,4 +32,5 @@ public class MainActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             return netInfo != null && netInfo.isConnected();
         }
-    }
+
+}

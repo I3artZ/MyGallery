@@ -3,17 +3,22 @@ package com.example.mygallery;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NavUtils;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -21,6 +26,7 @@ public class ListActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
     private static ArrayList<DataModel> data;
+    private static ArrayList<String> pictureUrlList = new ArrayList<>();
     static View.OnClickListener myOnClickListener;
     private Context context;
 
@@ -35,9 +41,14 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         data = (ArrayList<DataModel>) getIntent().getSerializableExtra("data");
+        for (DataModel dataModel: data) {
+            pictureUrlList.add(dataModel.getImageUrl());
+        }
+        Log.v("pictureulrlist", pictureUrlList+"");
 
         recyclerView = findViewById(R.id.list_recycler_view);
         myOnClickListener = new MyOnClickListener(this);
+        recyclerView.setOnClickListener(myOnClickListener);
 
         //ensure that each added item is of same size (true - size of each item is fixed it won;t be
         // checked each time after insertion)
@@ -45,7 +56,6 @@ public class ListActivity extends AppCompatActivity {
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         adapter = new ListAdapter(this, data);
@@ -62,8 +72,16 @@ public class ListActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onClick(View v) {
-            Intent bigger = new Intent();
+        public void onClick(final View view) {
+            //get index of clicked picture
+            int itemPosition = recyclerView.getChildLayoutPosition(view);
+            Intent imageSwitcher = new Intent(context, FragmentSwitcher.class);
+            Bundle bundle = new Bundle();
+            bundle.putStringArrayList("urls", pictureUrlList);
+            bundle.putInt("index", itemPosition);
+            imageSwitcher.putExtra("extra", bundle);
+            context.startActivity(imageSwitcher);
+            Toast.makeText(context, itemPosition+"", Toast.LENGTH_LONG).show();
         }
 
     }
