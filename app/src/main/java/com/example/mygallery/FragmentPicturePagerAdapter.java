@@ -18,7 +18,7 @@ public class FragmentPicturePagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Log.v("position", position+"");
+        //Log.v("position", position+"");
         return FragmentPicture.newInstance(urls.get(position));
     }
 
@@ -26,4 +26,5 @@ public class FragmentPicturePagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return urls.size();
     }
+
 }

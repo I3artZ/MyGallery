@@ -2,10 +2,10 @@ package com.example.mygallery;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,11 +39,12 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
         data = (ArrayList<DataModel>) getIntent().getSerializableExtra("data");
         for (DataModel dataModel: data) {
             pictureUrlList.add(dataModel.getImageUrl());
         }
-        Log.v("pictureulrlist", pictureUrlList+"");
+        //Log.v("pictureulrlist", pictureUrlList+"");
 
         recyclerView = findViewById(R.id.list_recycler_view);
         myOnClickListener = new MyOnClickListener(this, recyclerView, pictureUrlList);

@@ -1,13 +1,13 @@
 package com.example.mygallery;
 
 import android.content.Context;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -63,6 +63,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         textViewAuthor.setText(dataSet.get(listPosition).getAuthor());
         textViewDatePublished.setText(dataSet.get(listPosition).getDateTaken());
         Glide.with(context).load(dataSet.get(listPosition).getImageUrl()).into(imageViewPicture);
+
     }
 
 
@@ -70,4 +71,5 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     public int getItemCount() {
         return dataSet.size();
     }
+
 }

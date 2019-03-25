@@ -1,36 +1,28 @@
 package com.example.mygallery;
 
-import android.content.Context;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
+
 
 
 public class MainActivity extends AppCompatActivity {
-
+    public MyReceiver myReceiver = new MyReceiver(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        if (!isOnline()) {
-            Toast.makeText(this, "Check your internet connection",
-                    Toast.LENGTH_SHORT).show();
-        } else {
-            DataDownload dataDownload = new DataDownload(this);
-            dataDownload.execute();
-        }
+        registerReceiver(myReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
     }
 
-        public boolean isOnline() {
-            ConnectivityManager cm =
-                    (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getActiveNetworkInfo();
-            return netInfo != null && netInfo.isConnected();
-        }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(myReceiver);
+    }
 }
+
+
+

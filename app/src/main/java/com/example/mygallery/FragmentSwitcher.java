@@ -1,9 +1,13 @@
 package com.example.mygallery;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -14,10 +18,12 @@ public class FragmentSwitcher extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // check internet connection
 
         data = getIntent().getBundleExtra("extra").getStringArrayList("urls");
         index = getIntent().getBundleExtra("extra").getInt("index");
-        Log.v("fragment_switcher", index+"");
+
+        //Log.v("fragment_switcher", index+"");
         setContentView(R.layout.activity_fragment_switcher);
 
         // Find the view pager that will allow the user to swipe between fragments
