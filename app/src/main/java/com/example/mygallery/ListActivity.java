@@ -18,16 +18,15 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private static RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private static ArrayList<DataModel> data;
     private static ArrayList<String> pictureUrlList = new ArrayList<>();
-    static View.OnClickListener myOnClickListener;
+    public static View.OnClickListener myOnClickListener;
     private Context context;
 
     public ListActivity(){}
@@ -47,8 +46,7 @@ public class ListActivity extends AppCompatActivity {
         Log.v("pictureulrlist", pictureUrlList+"");
 
         recyclerView = findViewById(R.id.list_recycler_view);
-        myOnClickListener = new MyOnClickListener(this);
-        recyclerView.setOnClickListener(myOnClickListener);
+        myOnClickListener = new MyOnClickListener(this, recyclerView, pictureUrlList);
 
         //ensure that each added item is of same size (true - size of each item is fixed it won;t be
         // checked each time after insertion)
@@ -62,29 +60,6 @@ public class ListActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-
-    private static class MyOnClickListener implements View.OnClickListener {
-
-        private final Context context;
-
-        private MyOnClickListener(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        public void onClick(final View view) {
-            //get index of clicked picture
-            int itemPosition = recyclerView.getChildLayoutPosition(view);
-            Intent imageSwitcher = new Intent(context, FragmentSwitcher.class);
-            Bundle bundle = new Bundle();
-            bundle.putStringArrayList("urls", pictureUrlList);
-            bundle.putInt("index", itemPosition);
-            imageSwitcher.putExtra("extra", bundle);
-            context.startActivity(imageSwitcher);
-            Toast.makeText(context, itemPosition+"", Toast.LENGTH_LONG).show();
-        }
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

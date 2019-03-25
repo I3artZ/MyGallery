@@ -1,5 +1,6 @@
 package com.example.mygallery;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,7 +36,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.MyViewHolder> 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_grid_item, parent, false);
 
-        view.setOnClickListener(ListActivity.myOnClickListener);
+        view.setOnClickListener(GridActivity.myOnClickListener);
 
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;

@@ -31,4 +31,5 @@ public class FragmentSwitcher extends AppCompatActivity {
         // allows to swap pictures with same order as in list
         viewPager.setCurrentItem(index);
     }
+
 }

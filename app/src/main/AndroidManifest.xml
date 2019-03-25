@@ -25,7 +25,8 @@
         </activity>
         <activity android:name=".GridActivity"></activity>
         <activity android:name=".ListActivity"></activity>
-        <activity android:name=".FragmentSwitcher"></activity>
+        <activity android:name=".FragmentSwitcher"
+            android:noHistory="true"></activity>
         <activity
             android:name=".AboutActivity"
             android:label="About"></activity>

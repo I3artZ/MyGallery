@@ -44,6 +44,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_list_item, parent, false);
 
+
         view.setOnClickListener(ListActivity.myOnClickListener);
 
         MyViewHolder myViewHolder = new MyViewHolder(view);

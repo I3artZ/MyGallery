@@ -1,28 +1,27 @@
 package com.example.mygallery;
 
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.GridLayout;
+import android.view.View;
 
 import java.util.ArrayList;
 
 public class GridActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    GridLayoutManager layoutManager;
-    GridAdapter gridAdapter;
+    private RecyclerView recyclerView;
+    private GridLayoutManager layoutManager;
+    private GridAdapter gridAdapter;
     final int NR_OF_COLUMNS = 2;
-    ArrayList<DataModel> data;
+    private ArrayList<DataModel> data;
+    public static View.OnClickListener myOnClickListener;
+    private static ArrayList<String> pictureUrlList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +29,13 @@ public class GridActivity extends AppCompatActivity {
         setContentView(R.layout.activity_grid);
         //get downloaded data
         data = (ArrayList<DataModel>) getIntent().getSerializableExtra("data");
+        for (DataModel dataModel: data) {
+            pictureUrlList.add(dataModel.getImageUrl());
+        }
         //Log.v("grid", data.toString());
 
         recyclerView = findViewById(R.id.grid_recycler_view);
-
+        myOnClickListener = new MyOnClickListener(this, recyclerView, pictureUrlList);
         //ensure that each added item is of same size (true - size of each item is fixed it won;t be
         // checked each time after insertion)
         recyclerView.setHasFixedSize(true);
