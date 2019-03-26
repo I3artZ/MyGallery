@@ -6,7 +6,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
+import com.github.chrisbanes.photoview.PhotoView;
 
 
 public class FragmentPicture extends android.support.v4.app.Fragment {
@@ -30,9 +31,10 @@ public class FragmentPicture extends android.support.v4.app.Fragment {
     container, @Nullable Bundle savedInstanceState){
 
         View v = inflater.inflate(R.layout.activity_fragment_picture, container, false);
-        ImageView imageView = v.findViewById(R.id.fragment_picture);
-        imageView.setImageBitmap(getPicture());
+        PhotoView photoView = v.findViewById(R.id.fragment_picture);
+        photoView.setImageBitmap(getPicture());
         //Glide.with(this).load(getPicture()).into(imageView);
         return v;
     }
 }
+

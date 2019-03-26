@@ -17,16 +17,14 @@ public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         status = NetworkUtil.getConnectivityStatusString(context);
-        if(status.equals("Connected")) {
+        if (status.equals("Connected")) {
             DataDownload dataDownload = new DataDownload(context);
             dataDownload.execute();
+            Toast.makeText(context, "Downloading data...", Toast.LENGTH_LONG).show();
+        } else {
+            status = "Check your internet connection";
             Toast.makeText(context, status, Toast.LENGTH_LONG).show();
-        } else{
-        status="Check your internet connection";
-        Toast.makeText(context, status, Toast.LENGTH_LONG).show();
-    }}
-
-    public String getStatus() {
-        return status;
+        }
     }
+
 }

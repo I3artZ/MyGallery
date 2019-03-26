@@ -2,7 +2,6 @@ package com.example.mygallery;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +50,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
-
+        //set content to proper views
         TextView textViewTitle = holder.textViewTitle;
         TextView textViewAuthor = holder.textViewAuthor;
         TextView textViewDatePublished = holder.textViewDatePublished;
@@ -60,14 +59,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         textViewTitle.setText(dataSet.get(listPosition).getTitle());
         textViewAuthor.setText(dataSet.get(listPosition).getAuthor());
         textViewDatePublished.setText(dataSet.get(listPosition).getDateTaken());
-        //Glide.with(context).load(dataSet.get(listPosition).getImage()).into(imageViewPicture);
         imageViewPicture.setImageBitmap(dataSet.get(listPosition).getImage());
     }
 
 
     @Override
     public int getItemCount() {
-        Log.v("list picture list size", dataSet.size() + "");
         return dataSet.size();
     }
 

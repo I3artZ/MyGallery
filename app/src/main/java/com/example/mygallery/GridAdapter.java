@@ -2,7 +2,6 @@ package com.example.mygallery;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,14 +31,11 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.MyViewHolder> 
     }
 
 
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_grid_item, parent, false);
         view.setOnClickListener(GridActivity.myOnClickListener);
-        //view.setMinimumWidth(parent.getMeasuredWidth()/2);
-        //view.setMinimumHeight(parent.getMeasuredWidth()/2);
         MyViewHolder myViewHolder = new MyViewHolder(view);
 
         return myViewHolder;
@@ -48,15 +44,13 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
-
+        //assign picture to view
         ImageView imageViewPicture = holder.imageViewPicture;
         imageViewPicture.setImageBitmap(dataSet.get(listPosition).getImage());
-        //Glide.with(context).load(pictureList.get(listPosition)).into(imageViewPicture);
     }
 
     @Override
     public int getItemCount() {
-        Log.v("grid pictureList size", dataSet.size() + "");
         return dataSet.size();
     }
 }

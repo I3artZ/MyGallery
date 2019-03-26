@@ -62,7 +62,7 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
         if (myData != null) {
             // go to grid activity after parsing the json
             Intent gridView = new Intent(mContext, GridActivity.class);
-            //gridView.putExtra("data", myData);
+            //after download /close mainActivity and go do gridaActivity
             mContext.startActivity(gridView);
         }
     }
@@ -197,17 +197,5 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
             e.printStackTrace();
             return null;
         }
-    }
-    public static Bitmap scaleDown(Bitmap realImage, float maxImageSize,
-                                   boolean filter) {
-        float ratio = Math.min(
-                maxImageSize / realImage.getWidth(),
-                maxImageSize / realImage.getHeight());
-        int width = Math.round(ratio * realImage.getWidth());
-        int height = Math.round(ratio * realImage.getHeight());
-
-        Bitmap newBitmap = Bitmap.createScaledBitmap(realImage, width,
-                height, filter);
-        return newBitmap;
     }
 }

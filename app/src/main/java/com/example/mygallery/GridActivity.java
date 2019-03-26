@@ -35,7 +35,6 @@ public class GridActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
         //get downloaded data
-        //data = (ArrayList<DataModel>) getIntent().getSerializableExtra("data");
         data = DataDownload.getMyData();
         //Log.v("grid", data.toString());
 
