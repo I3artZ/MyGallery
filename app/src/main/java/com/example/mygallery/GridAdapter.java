@@ -1,8 +1,8 @@
 package com.example.mygallery;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +12,18 @@ import java.util.ArrayList;
 
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.MyViewHolder> {
 
-    ArrayList<Bitmap> pictureList;
+    ArrayList<DataModel> dataSet;
     Context context;
 
-    public GridAdapter(Context context, ArrayList<Bitmap> pictureList){
+    public GridAdapter(Context context, ArrayList<DataModel> dataSet) {
         this.context = context;
-        this.pictureList = pictureList;
+        this.dataSet = dataSet;
     }
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewPicture;
+
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -36,8 +38,10 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.MyViewHolder> 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_grid_item, parent, false);
         view.setOnClickListener(GridActivity.myOnClickListener);
-        view.setMinimumHeight(GridActivity.width/2);
+        //view.setMinimumWidth(parent.getMeasuredWidth()/2);
+        //view.setMinimumHeight(parent.getMeasuredWidth()/2);
         MyViewHolder myViewHolder = new MyViewHolder(view);
+
         return myViewHolder;
     }
 
@@ -46,12 +50,13 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.MyViewHolder> 
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
 
         ImageView imageViewPicture = holder.imageViewPicture;
-        imageViewPicture.setImageBitmap(pictureList.get(listPosition));
+        imageViewPicture.setImageBitmap(dataSet.get(listPosition).getImage());
         //Glide.with(context).load(pictureList.get(listPosition)).into(imageViewPicture);
     }
 
     @Override
     public int getItemCount() {
-        return pictureList.size();
+        Log.v("grid pictureList size", dataSet.size() + "");
+        return dataSet.size();
     }
 }

@@ -1,11 +1,11 @@
 package com.example.mygallery;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.provider.ContactsContract;
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,8 +25,6 @@ public class GridActivity extends AppCompatActivity {
     private ArrayList<DataModel> data;
     public static View.OnClickListener myOnClickListener;
     private static ArrayList<Bitmap> pictureList = new ArrayList<>();
-    public static int width;
-    public static int height;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +34,9 @@ public class GridActivity extends AppCompatActivity {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-        width = metrics.widthPixels;
-        height = metrics.heightPixels;
-
         //get downloaded data
         //data = (ArrayList<DataModel>) getIntent().getSerializableExtra("data");
         data = DataDownload.getMyData();
-        for (DataModel dataModel: data) {
-            pictureList.add(dataModel.getImage());
-        }
         //Log.v("grid", data.toString());
 
         recyclerView = findViewById(R.id.grid_recycler_view);
@@ -53,12 +45,12 @@ public class GridActivity extends AppCompatActivity {
         // checked each time after insertion)
         recyclerView.setHasFixedSize(true);
 
-        layoutManager = new GridLayoutManager(this, NR_OF_COLUMNS);
+        layoutManager = new GridLayoutManager(this, calculateNoOfColumns(this));
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        gridAdapter = new GridAdapter(this, pictureList);
+        gridAdapter = new GridAdapter(this, data);
         recyclerView.setAdapter(gridAdapter);
     }
 
@@ -74,6 +66,7 @@ public class GridActivity extends AppCompatActivity {
         finish();
         System.exit(0);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -93,13 +86,16 @@ public class GridActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setData(ArrayList<DataModel> data) {
-        this.data = data;
+    public int calculateNoOfColumns(Context context) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        //return nr of columns (180 to make each cell to be square (180 = height od grid item)
+        return (int) (dpWidth / 180);
     }
 
-    public ArrayList<DataModel> getData() {
-        return data;
+    @Override
+    protected void onStart() {
+        super.onStart();
+        data = DataDownload.getMyData();
     }
-
-
 }

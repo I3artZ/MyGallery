@@ -5,11 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.ListView;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +25,7 @@ import java.util.ArrayList;
 public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
 
     public static ArrayList<DataModel> myData = new ArrayList<>();
+    public static ArrayList<Bitmap> pictureList = new ArrayList<>();
 
     private static final String FLICKR_URL =
             "https://api.flickr.com/services/feeds/photos_public.gne?format=json";
@@ -178,6 +176,13 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
         return myData;
     }
 
+    public static ArrayList<Bitmap> getPictureList() {
+        for (DataModel dataModel : myData) {
+            pictureList.add(dataModel.getImage());
+        }
+        return pictureList;
+    }
+
     public static Bitmap getBitmapFromURL(String src) {
         try {
             URL url = new URL(src);
@@ -196,10 +201,10 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
     public static Bitmap scaleDown(Bitmap realImage, float maxImageSize,
                                    boolean filter) {
         float ratio = Math.min(
-                (float) maxImageSize / realImage.getWidth(),
-                (float) maxImageSize / realImage.getHeight());
-        int width = Math.round((float) ratio * realImage.getWidth());
-        int height = Math.round((float) ratio * realImage.getHeight());
+                maxImageSize / realImage.getWidth(),
+                maxImageSize / realImage.getHeight());
+        int width = Math.round(ratio * realImage.getWidth());
+        int height = Math.round(ratio * realImage.getHeight());
 
         Bitmap newBitmap = Bitmap.createScaledBitmap(realImage, width,
                 height, filter);

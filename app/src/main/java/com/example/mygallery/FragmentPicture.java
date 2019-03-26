@@ -9,9 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 
-import com.bumptech.glide.Glide;
-
-
 public class FragmentPicture extends android.support.v4.app.Fragment {
 
     public static FragmentPicture newInstance(Bitmap picture) {

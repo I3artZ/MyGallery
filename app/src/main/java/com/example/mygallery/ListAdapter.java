@@ -1,19 +1,13 @@
 package com.example.mygallery;
 
 import android.content.Context;
-
-import android.graphics.Point;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -32,7 +26,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         TextView textViewAuthor;
         TextView textViewDatePublished;
         ImageView imageViewPicture;
-        Context context;
+
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -48,7 +42,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_list_item, parent, false);
-
 
         view.setOnClickListener(ListActivity.myOnClickListener);
 
@@ -74,6 +67,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     @Override
     public int getItemCount() {
+        Log.v("list picture list size", dataSet.size() + "");
         return dataSet.size();
     }
 

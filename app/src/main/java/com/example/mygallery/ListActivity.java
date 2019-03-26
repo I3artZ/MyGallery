@@ -3,20 +3,15 @@ package com.example.mygallery;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
 
 import java.util.ArrayList;
 
@@ -33,7 +28,7 @@ public class ListActivity extends AppCompatActivity {
     public ListActivity(){}
 
     public ListActivity(ArrayList<DataModel> data){
-        this.data = data;
+        ListActivity.data = data;
     }
 
     @Override
@@ -42,9 +37,8 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         data = DataDownload.getMyData();
-        for (DataModel dataModel: data) {
-            pictureList.add(dataModel.getImage());
-        }
+        //pictureList = DataDownload.getPictureList();
+
         //Log.v("pictureulrlist", pictureUrlList+"");
 
         recyclerView = findViewById(R.id.list_recycler_view);
@@ -90,4 +84,9 @@ public class ListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        data = DataDownload.getMyData();
+    }
 }
