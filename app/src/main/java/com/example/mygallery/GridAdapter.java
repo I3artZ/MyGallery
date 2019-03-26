@@ -7,22 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.MyViewHolder> {
 
-    ArrayList<DataModel> data;
+    ArrayList<DataModel> dataSet;
     Context context;
 
-    public GridAdapter(Context context, ArrayList<DataModel> data){
+    public GridAdapter(Context context, ArrayList<DataModel> dataSet) {
         this.context = context;
-        this.data = data;
+        this.dataSet = dataSet;
     }
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewPicture;
+
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -30,26 +30,27 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.MyViewHolder> 
         }
     }
 
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_grid_item, parent, false);
-
-        view.setOnClickListener(ListActivity.myOnClickListener);
-
+        view.setOnClickListener(GridActivity.myOnClickListener);
         MyViewHolder myViewHolder = new MyViewHolder(view);
+
         return myViewHolder;
     }
 
+
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
-
+        //assign picture to view
         ImageView imageViewPicture = holder.imageViewPicture;
-        Glide.with(context).load(data.get(listPosition).getImageUrl()).into(imageViewPicture);
+        imageViewPicture.setImageBitmap(dataSet.get(listPosition).getImage());
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return dataSet.size();
     }
 }

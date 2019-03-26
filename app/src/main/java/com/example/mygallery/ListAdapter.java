@@ -7,9 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -28,10 +25,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         TextView textViewAuthor;
         TextView textViewDatePublished;
         ImageView imageViewPicture;
-        Context context;
+
 
         public MyViewHolder(View itemView) {
             super(itemView);
+
             this.textViewTitle = itemView.findViewById(R.id.list_item_text_title);
             this.textViewAuthor = itemView.findViewById(R.id.list_item_text_author);
             this.textViewDatePublished = itemView.findViewById(R.id.list_item_text_date);
@@ -52,7 +50,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
-
+        //set content to proper views
         TextView textViewTitle = holder.textViewTitle;
         TextView textViewAuthor = holder.textViewAuthor;
         TextView textViewDatePublished = holder.textViewDatePublished;
@@ -61,7 +59,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         textViewTitle.setText(dataSet.get(listPosition).getTitle());
         textViewAuthor.setText(dataSet.get(listPosition).getAuthor());
         textViewDatePublished.setText(dataSet.get(listPosition).getDateTaken());
-        Glide.with(context).load(dataSet.get(listPosition).getImageUrl()).into(imageViewPicture);
+        imageViewPicture.setImageBitmap(dataSet.get(listPosition).getImage());
     }
 
 
@@ -69,4 +67,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     public int getItemCount() {
         return dataSet.size();
     }
+
+
 }

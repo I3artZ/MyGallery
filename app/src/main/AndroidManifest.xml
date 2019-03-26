@@ -25,10 +25,17 @@
         </activity>
         <activity android:name=".GridActivity"></activity>
         <activity android:name=".ListActivity"></activity>
-        <activity android:name=".FragmentSwitcher"></activity>
+        <activity android:name=".FragmentSwitcher"
+            android:noHistory="true"></activity>
         <activity
             android:name=".AboutActivity"
             android:label="About"></activity>
+        <receiver android:name=".MyReceiver" >
+        <intent-filter>
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+        </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

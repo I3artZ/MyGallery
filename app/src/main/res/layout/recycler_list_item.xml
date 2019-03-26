@@ -1,61 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
-              android:layout_marginBottom="2dp"
-              android:padding="10dp"
-              android:background="@color/colorBackList"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@color/colorPrimary"
+    android:layout_margin="10dp"
+    card_view:cardCornerRadius="20dp"
+    card_view:cardElevation="20dp">
 
-      <ImageView
-          android:id="@+id/list_item_image"
-          android:layout_width="300dp"
-          android:layout_gravity="center"
-          android:layout_height="200dp"
-          android:layout_weight="10"
-          android:gravity="center"
-          android:scaleType="fitXY"
-          tools:src="@tools:sample/avatars" />
-
-      <TextView
-          android:id="@+id/list_item_text_title"
-          android:layout_width="300dp"
-          android:layout_gravity="center"
+      <LinearLayout
+          android:orientation="horizontal"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_weight="0.2"
           android:background="@color/colorList"
-          android:paddingLeft="8dp"
-          android:gravity="start"
-          android:textAppearance="@style/TextAppearance.AppCompat.Small"
-          android:textColor="@color/white"
-          android:textStyle="bold"
-          tools:text="@tools:sample/lorem" />
+          android:minHeight="200dp">
 
-      <TextView
-          android:id="@+id/list_item_text_author"
-          android:layout_width="300dp"
-          android:layout_gravity="center"
-          android:layout_height="wrap_content"
-          android:layout_weight="0.2"
-          android:paddingLeft="8dp"
-          android:background="@color/colorList"
-          android:gravity="start"
-          android:textAppearance="@style/TextAppearance.AppCompat.Small"
-          android:textColor="@color/white"
-          tools:text="@tools:sample/full_names" />
+            <ImageView
+                android:id="@+id/list_item_image"
+                android:layout_width="200dp"
+                android:layout_gravity="left"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:background="@color/colorList"
+                android:padding="8dp"
+                tools:src="@tools:sample/avatars" />
 
-      <TextView
-          android:id="@+id/list_item_text_date"
-          android:layout_width="300dp"
-          android:layout_gravity="center"
-          android:layout_height="wrap_content"
-          android:paddingLeft="8dp"
-          android:layout_weight="0.2"
-          android:background="@color/colorList"
-          android:gravity="start"
-          android:textAppearance="@style/TextAppearance.AppCompat.Small"
-          android:textColor="@color/white"
-          tools:text="@tools:sample/date/mmddyy" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:orientation="vertical">
 
-</LinearLayout>
+                  <TextView
+                      android:id="@+id/list_item_text_title"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:background="@color/colorList"
+                      android:paddingLeft="5dp"
+                      android:paddingBottom="8dp"
+                      android:paddingRight="8dp"
+                      android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                      android:textColor="@color/white"
+                      android:textStyle="bold"
+                      tools:text="@tools:sample/lorem" />
+
+                  <TextView
+                      android:id="@+id/list_item_text_author"
+                      android:layout_width="match_parent"
+                      android:layout_gravity="center"
+                      android:layout_height="wrap_content"
+                      android:paddingLeft="5dp"
+                      android:background="@color/colorList"
+                      android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                      android:textColor="@color/white"
+                      tools:text="@tools:sample/full_names" />
+
+                  <TextView
+                      android:id="@+id/list_item_text_date"
+                      android:layout_width="match_parent"
+                      android:layout_gravity="center"
+                      android:layout_height="wrap_content"
+                      android:paddingLeft="5dp"
+                      android:background="@color/colorList"
+                      android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                      android:textColor="@color/white"
+                      tools:text="@tools:sample/date/mmddyy" />
+            </LinearLayout>
+      </LinearLayout>
+</android.support.v7.widget.CardView>

@@ -1,6 +1,6 @@
 package com.example.mygallery;
 
-import android.support.annotation.NonNull;
+import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -10,23 +10,22 @@ import java.util.ArrayList;
 
 public class FragmentPicturePagerAdapter extends FragmentPagerAdapter {
 
-    ArrayList<String> urls;
-    int index;
-    FragmentPicturePagerAdapter pagerAdapter;
+    ArrayList<Bitmap> pictureList;
 
-    public FragmentPicturePagerAdapter(FragmentManager fm, ArrayList<String> urls) {
+    public FragmentPicturePagerAdapter(FragmentManager fm, ArrayList<Bitmap> pictureList) {
         super(fm);
-        this.urls = urls;
+        this.pictureList = pictureList;
     }
 
     @Override
     public Fragment getItem(int position) {
-        Log.v("position", position+"");
-        return FragmentPicture.newInstance(urls.get(position));
+        //Log.v("position", position+"");
+        return FragmentPicture.newInstance(pictureList.get(position));
     }
 
     @Override
     public int getCount() {
-        return urls.size();
+        return pictureList.size();
     }
+
 }
