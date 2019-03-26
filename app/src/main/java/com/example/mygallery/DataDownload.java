@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
 
-    public ArrayList<DataModel> myData = new ArrayList<>();
+    public static ArrayList<DataModel> myData = new ArrayList<>();
 
     private static final String FLICKR_URL =
             "https://api.flickr.com/services/feeds/photos_public.gne?format=json";
@@ -64,7 +64,7 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
         if (myData != null) {
             // go to grid activity after parsing the json
             Intent gridView = new Intent(mContext, GridActivity.class);
-            gridView.putExtra("data", myData);
+            //gridView.putExtra("data", myData);
             mContext.startActivity(gridView);
         }
     }
@@ -154,9 +154,9 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
                     //Log.v(LOG_TAG, author);
                     String imageUrl = media.optString("m");
                     //Log.v(LOG_TAG, imageUrl);
+                    //Bitmap imageBitmap = scaleDown(getBitmapFromURL(imageUrl),2000F,true);
                     Bitmap imageBitmap = getBitmapFromURL(imageUrl);
-
-                    myData.add(new DataModel(title, author, date_taken, imageUrl));
+                    myData.add(new DataModel(title, author, date_taken, imageBitmap));
                 }
             }
             return myData;
@@ -174,7 +174,7 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
         return correctedData;
     }
 
-    public ArrayList<DataModel> getMyData() {
+    public static ArrayList<DataModel> getMyData() {
         return myData;
     }
 
@@ -192,5 +192,17 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
             e.printStackTrace();
             return null;
         }
+    }
+    public static Bitmap scaleDown(Bitmap realImage, float maxImageSize,
+                                   boolean filter) {
+        float ratio = Math.min(
+                (float) maxImageSize / realImage.getWidth(),
+                (float) maxImageSize / realImage.getHeight());
+        int width = Math.round((float) ratio * realImage.getWidth());
+        int height = Math.round((float) ratio * realImage.getHeight());
+
+        Bitmap newBitmap = Bitmap.createScaledBitmap(realImage, width,
+                height, filter);
+        return newBitmap;
     }
 }

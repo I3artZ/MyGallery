@@ -2,6 +2,7 @@ package com.example.mygallery;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -25,7 +26,7 @@ public class ListActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
     private static ArrayList<DataModel> data;
-    private static ArrayList<String> pictureUrlList = new ArrayList<>();
+    private static ArrayList<Bitmap> pictureList = new ArrayList<>();
     public static View.OnClickListener myOnClickListener;
     private Context context;
 
@@ -40,14 +41,14 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        data = (ArrayList<DataModel>) getIntent().getSerializableExtra("data");
+        data = DataDownload.getMyData();
         for (DataModel dataModel: data) {
-            pictureUrlList.add(dataModel.getImageUrl());
+            pictureList.add(dataModel.getImage());
         }
         //Log.v("pictureulrlist", pictureUrlList+"");
 
         recyclerView = findViewById(R.id.list_recycler_view);
-        myOnClickListener = new MyOnClickListener(this, recyclerView, pictureUrlList);
+        myOnClickListener = new MyOnClickListener(this, recyclerView);
 
         //ensure that each added item is of same size (true - size of each item is fixed it won;t be
         // checked each time after insertion)
@@ -79,7 +80,7 @@ public class ListActivity extends AppCompatActivity {
                 return true;
             case R.id.action_grid_view:
                 Intent gridView = new Intent(this, GridActivity.class);
-                gridView.putExtra("data", data);
+                //gridView.putExtra("data", data);
                 startActivity(gridView);
                 return true;
             case R.id.action_about:

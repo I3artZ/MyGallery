@@ -1,5 +1,6 @@
 package com.example.mygallery;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,17 +14,17 @@ import com.bumptech.glide.Glide;
 
 public class FragmentPicture extends android.support.v4.app.Fragment {
 
-    public static FragmentPicture newInstance(String url) {
-        FragmentPicture picture = new FragmentPicture();
+    public static FragmentPicture newInstance(Bitmap picture) {
+        FragmentPicture fragmentPicture = new FragmentPicture();
         // Supply index input as an argument.
         Bundle args = new Bundle();
-        args.putString("url", url);
-        picture.setArguments(args);
-
-        return picture;
+        args.putParcelable("picture", picture);
+        fragmentPicture.setArguments(args);
+        return fragmentPicture;
         }
-    public String getUrl() {
-        return getArguments().getString("url","http://atypikhouse.co/public/images/activites/image_manquante.png");
+
+    public Bitmap getPicture() {
+        return getArguments().getParcelable("picture");
     }
 
     @Nullable
@@ -33,7 +34,8 @@ public class FragmentPicture extends android.support.v4.app.Fragment {
 
         View v = inflater.inflate(R.layout.activity_fragment_picture, container, false);
         ImageView imageView = v.findViewById(R.id.fragment_picture);
-        Glide.with(this).load(getUrl()).into(imageView);
+        imageView.setImageBitmap(getPicture());
+        //Glide.with(this).load(getPicture()).into(imageView);
         return v;
     }
 }

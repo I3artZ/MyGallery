@@ -2,10 +2,14 @@ package com.example.mygallery;
 
 import android.content.Context;
 
+import android.graphics.Point;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,6 +36,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
         public MyViewHolder(View itemView) {
             super(itemView);
+
             this.textViewTitle = itemView.findViewById(R.id.list_item_text_title);
             this.textViewAuthor = itemView.findViewById(R.id.list_item_text_author);
             this.textViewDatePublished = itemView.findViewById(R.id.list_item_text_date);
@@ -62,8 +67,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         textViewTitle.setText(dataSet.get(listPosition).getTitle());
         textViewAuthor.setText(dataSet.get(listPosition).getAuthor());
         textViewDatePublished.setText(dataSet.get(listPosition).getDateTaken());
-        Glide.with(context).load(dataSet.get(listPosition).getImageUrl()).into(imageViewPicture);
-
+        //Glide.with(context).load(dataSet.get(listPosition).getImage()).into(imageViewPicture);
+        imageViewPicture.setImageBitmap(dataSet.get(listPosition).getImage());
     }
 
 
@@ -71,5 +76,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     public int getItemCount() {
         return dataSet.size();
     }
+
 
 }

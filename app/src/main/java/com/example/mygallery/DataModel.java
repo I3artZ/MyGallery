@@ -1,20 +1,22 @@
 package com.example.mygallery;
 
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
-public class DataModel implements Serializable {
+public class DataModel {
 
     String title;
     String author;
     String dateTaken;
-    String imageUrl;
+    Bitmap image;
 
-    public DataModel(String title, String author, String dateTaken, String imageUrl) {
+    public DataModel(String title, String author, String dateTaken, Bitmap image) {
         this.title = title;
         this.author = author;
         this.dateTaken = dateTaken;
-        this.imageUrl = imageUrl;
+        this.image = image;
     }
 
     public String getTitle() {
@@ -25,8 +27,8 @@ public class DataModel implements Serializable {
         return author;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public Bitmap getImage() {
+        return image;
     }
 
     public String getDateTaken() {

@@ -15,7 +15,8 @@
           android:layout_height="200dp"
           android:layout_weight="10"
           android:gravity="center"
-          android:scaleType="fitXY"
+          android:background="@color/colorList"
+          android:padding="8dp"
           tools:src="@tools:sample/avatars" />
 
       <TextView
@@ -26,6 +27,8 @@
           android:layout_weight="0.2"
           android:background="@color/colorList"
           android:paddingLeft="8dp"
+          android:paddingBottom="8dp"
+          android:paddingRight="8dp"
           android:gravity="start"
           android:textAppearance="@style/TextAppearance.AppCompat.Small"
           android:textColor="@color/white"

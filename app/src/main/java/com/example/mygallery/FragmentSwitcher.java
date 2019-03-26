@@ -1,6 +1,7 @@
 package com.example.mygallery;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -12,16 +13,21 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class FragmentSwitcher extends AppCompatActivity {
-    private ArrayList<String> data;
+    private ArrayList<DataModel> data;
     private int index;
+    private ArrayList<Bitmap> pictureList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // check internet connection
+        data = DataDownload.getMyData();
+        for (DataModel dataModel: data) {
+            pictureList.add(dataModel.getImage());
+        }
 
-        data = getIntent().getBundleExtra("extra").getStringArrayList("urls");
-        index = getIntent().getBundleExtra("extra").getInt("index");
+        //data = getIntent().getBundleExtra("extra").getStringArrayList("urls");
+        index = getIntent().getIntExtra("index", 0);
 
         //Log.v("fragment_switcher", index+"");
         setContentView(R.layout.activity_fragment_switcher);
@@ -30,7 +36,7 @@ public class FragmentSwitcher extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.viewpager);
 
         // Create an adapter that knows which fragment should be shown on each page
-        FragmentPicturePagerAdapter adapter = new FragmentPicturePagerAdapter(getSupportFragmentManager(), data);
+        FragmentPicturePagerAdapter adapter = new FragmentPicturePagerAdapter(getSupportFragmentManager(), pictureList);
         viewPager.setAdapter(adapter);
 
         //set starting fragment position (index of picture which was clicked) to be equal index -
