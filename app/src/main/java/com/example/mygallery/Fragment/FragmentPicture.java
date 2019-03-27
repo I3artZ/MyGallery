@@ -1,4 +1,4 @@
-package com.example.mygallery;
+package com.example.mygallery.Fragment;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mygallery.R;
 import com.github.chrisbanes.photoview.PhotoView;
 
 
@@ -33,7 +34,6 @@ public class FragmentPicture extends android.support.v4.app.Fragment {
         View v = inflater.inflate(R.layout.activity_fragment_picture, container, false);
         PhotoView photoView = v.findViewById(R.id.fragment_picture);
         photoView.setImageBitmap(getPicture());
-        //Glide.with(this).load(getPicture()).into(imageView);
         return v;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.mygallery;
+package com.example.mygallery.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.mygallery.Activities.ListActivity;
+import com.example.mygallery.DataHandling.DataModel;
+import com.example.mygallery.R;
 
 import java.util.ArrayList;
 
@@ -29,7 +33,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
+            //asssign extracted values to proper views in list item
             this.textViewTitle = itemView.findViewById(R.id.list_item_text_title);
             this.textViewAuthor = itemView.findViewById(R.id.list_item_text_author);
             this.textViewDatePublished = itemView.findViewById(R.id.list_item_text_date);

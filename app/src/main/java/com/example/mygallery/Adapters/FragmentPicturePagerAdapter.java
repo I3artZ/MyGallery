@@ -1,10 +1,11 @@
-package com.example.mygallery;
+package com.example.mygallery.Adapters;
 
 import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
+
+import com.example.mygallery.Fragment.FragmentPicture;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,6 @@ public class FragmentPicturePagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        //Log.v("position", position+"");
         return FragmentPicture.newInstance(pictureList.get(position));
     }
 

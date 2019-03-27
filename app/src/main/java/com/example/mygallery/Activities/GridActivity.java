@@ -1,8 +1,7 @@
-package com.example.mygallery;
+package com.example.mygallery.Activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.mygallery.Adapters.GridAdapter;
+import com.example.mygallery.ClickListeners.MyOnClickListener;
+import com.example.mygallery.DataHandling.DataDownload;
+import com.example.mygallery.DataHandling.DataModel;
+import com.example.mygallery.R;
+
 import java.util.ArrayList;
 
 public class GridActivity extends AppCompatActivity {
@@ -21,10 +26,8 @@ public class GridActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GridLayoutManager layoutManager;
     private GridAdapter gridAdapter;
-    final int NR_OF_COLUMNS = 2;
     private ArrayList<DataModel> data;
     public static View.OnClickListener myOnClickListener;
-    private static ArrayList<Bitmap> pictureList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,6 @@ public class GridActivity extends AppCompatActivity {
 
         //get downloaded data
         data = DataDownload.getMyData();
-        //Log.v("grid", data.toString());
 
         recyclerView = findViewById(R.id.grid_recycler_view);
         myOnClickListener = new MyOnClickListener(this, recyclerView);
@@ -61,13 +63,6 @@ public class GridActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        finish();
-        System.exit(0);
-    }
-
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_grid_view:
@@ -75,7 +70,6 @@ public class GridActivity extends AppCompatActivity {
                 return true;
             case R.id.action_list_view:
                 Intent listView = new Intent(this, ListActivity.class);
-                //listView.putExtra("data", data);
                 startActivity(listView);
                 return true;
             case R.id.action_about:
@@ -97,4 +91,6 @@ public class GridActivity extends AppCompatActivity {
         super.onStart();
         data = DataDownload.getMyData();
     }
+
+
 }
