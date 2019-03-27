@@ -1,4 +1,4 @@
-package com.example.mygallery;
+package com.example.mygallery.DataHandling;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.example.mygallery.Activities.GridActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,7 +55,7 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
         } catch (IOException exception) {
             Log.e(LOG_TAG, "Problem with connection" + exception);
         }
-        //Log.v(LOG_TAG, correctJson(jsonResponse));
+        //get arraylist of exctrated data
         return extractFeatureFromJson(correctJson(jsonResponse));
     }
 
@@ -62,7 +64,7 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
         if (myData != null) {
             // go to grid activity after parsing the json
             Intent gridView = new Intent(mContext, GridActivity.class);
-            //after download /close mainActivity and go do gridaActivity
+            //after download /close mainActivity and start gridActivity
             mContext.startActivity(gridView);
         }
     }
@@ -96,7 +98,7 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
                 urlConnection.disconnect();
             }
             if (inputStream != null) {
-                // function must handle java.io.IOException here
+                // function must handle java.io.IOException
                 inputStream.close();
             }
         }
@@ -124,7 +126,6 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
         try {
             JSONObject baseJsonResponse = new JSONObject(flickerJSON);
             JSONArray itemsArray = baseJsonResponse.getJSONArray("items");
-            //Log.v(LOG_TAG, itemsArray.length() +"" );
 
             // check if there are items in list(item - picture + description)
             if (itemsArray.length() > 0) {
@@ -152,7 +153,6 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
                     //Log.v(LOG_TAG, author);
                     String imageUrl = media.optString("m");
                     //Log.v(LOG_TAG, imageUrl);
-                    //Bitmap imageBitmap = scaleDown(getBitmapFromURL(imageUrl),2000F,true);
                     Bitmap imageBitmap = getBitmapFromURL(imageUrl);
                     myData.add(new DataModel(title, author, date_taken, imageBitmap));
                 }
@@ -176,12 +176,6 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
         return myData;
     }
 
-    public static ArrayList<Bitmap> getPictureList() {
-        for (DataModel dataModel : myData) {
-            pictureList.add(dataModel.getImage());
-        }
-        return pictureList;
-    }
 
     public static Bitmap getBitmapFromURL(String src) {
         try {
@@ -190,8 +184,7 @@ public class DataDownload extends AsyncTask<URL, Void, ArrayList<DataModel>> {
             connection.setDoInput(true);
             connection.connect();
             InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
+            return BitmapFactory.decodeStream(input);
 
         } catch (IOException e) {
             e.printStackTrace();

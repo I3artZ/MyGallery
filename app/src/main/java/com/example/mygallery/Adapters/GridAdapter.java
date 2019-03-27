@@ -1,4 +1,4 @@
-package com.example.mygallery;
+package com.example.mygallery.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.example.mygallery.Activities.GridActivity;
+import com.example.mygallery.DataHandling.DataModel;
+import com.example.mygallery.R;
 
 import java.util.ArrayList;
 

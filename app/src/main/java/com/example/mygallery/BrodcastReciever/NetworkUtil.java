@@ -1,4 +1,4 @@
-package com.example.mygallery;
+package com.example.mygallery.BrodcastReciever;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

@@ -1,10 +1,12 @@
-package com.example.mygallery;
+package com.example.mygallery.Activities;
 
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import com.example.mygallery.R;
 
 
 public class AboutActivity extends AppCompatActivity {

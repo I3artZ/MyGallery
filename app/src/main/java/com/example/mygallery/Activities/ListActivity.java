@@ -1,8 +1,7 @@
-package com.example.mygallery;
+package com.example.mygallery.Activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +12,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.mygallery.Adapters.ListAdapter;
+import com.example.mygallery.ClickListeners.MyOnClickListener;
+import com.example.mygallery.DataHandling.DataDownload;
+import com.example.mygallery.DataHandling.DataModel;
+import com.example.mygallery.R;
+
 import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity {
@@ -20,26 +25,17 @@ public class ListActivity extends AppCompatActivity {
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
-    private static ArrayList<DataModel> data;
-    private static ArrayList<Bitmap> pictureList = new ArrayList<>();
+    private ArrayList<DataModel> data;
     public static View.OnClickListener myOnClickListener;
     private Context context;
-
-    public ListActivity(){}
-
-    public ListActivity(ArrayList<DataModel> data){
-        ListActivity.data = data;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+        //get data
         data = DataDownload.getMyData();
-        //pictureList = DataDownload.getPictureList();
-
-        //Log.v("pictureulrlist", pictureUrlList+"");
 
         recyclerView = findViewById(R.id.list_recycler_view);
         myOnClickListener = new MyOnClickListener(this, recyclerView);
@@ -74,7 +70,6 @@ public class ListActivity extends AppCompatActivity {
                 return true;
             case R.id.action_grid_view:
                 Intent gridView = new Intent(this, GridActivity.class);
-                //gridView.putExtra("data", data);
                 startActivity(gridView);
                 return true;
             case R.id.action_about:

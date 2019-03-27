@@ -1,21 +1,22 @@
-package com.example.mygallery;
+package com.example.mygallery.BrodcastReciever;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.example.mygallery.DataHandling.DataDownload;
+
 public class MyReceiver extends BroadcastReceiver {
 
     private String status;
-    private Context context;
 
-    public MyReceiver(Context context){
-        this.context = context;
+    public MyReceiver() {
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        //check connectivity status
         status = NetworkUtil.getConnectivityStatusString(context);
         if (status.equals("Connected")) {
             DataDownload dataDownload = new DataDownload(context);

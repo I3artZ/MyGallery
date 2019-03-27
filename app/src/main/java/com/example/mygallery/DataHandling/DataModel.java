@@ -1,9 +1,8 @@
-package com.example.mygallery;
+package com.example.mygallery.DataHandling;
 
 
 import android.graphics.Bitmap;
 
-import java.io.Serializable;
 
 public class DataModel {
 

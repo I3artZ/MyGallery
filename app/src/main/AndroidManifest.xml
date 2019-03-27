@@ -13,9 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:noHistory="true">
-
             <!-- won't allow to return to MainActivity using back button -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,14 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GridActivity"></activity>
-        <activity android:name=".ListActivity"></activity>
-        <activity android:name=".FragmentSwitcher"
+        <activity android:name=".Activities.GridActivity"></activity>
+        <activity android:name=".Activities.ListActivity"></activity>
+        <activity
+            android:name=".Activities.FragmentSwitcher"
             android:noHistory="true"></activity>
         <activity
-            android:name=".AboutActivity"
+            android:name=".Activities.AboutActivity"
             android:label="About"></activity>
-        <receiver android:name=".MyReceiver" >
+
+        <receiver android:name=".BrodcastReciever.MyReceiver">
         <intent-filter>
             <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
